@@ -9,6 +9,15 @@ client.on('ready', () => {
     client.channels.cache.find(channel => channel.name === 'XXXXXX').send("HomeBot - Online"); 
 });
 
+// Bot is used for:
+// - Use Help for showing commands
+// - shutdown the Dell R720 Server
+// - start the Dell R720 Server
+// - status of the Dell R720 Server -> Power Status + Powerusage
+
+// Replace the XXX in Token wit your token from your bot
+// Replace the IP, User & Password in ipmitool from your Server
+
 client.on('message', message => {
     if (message.content === '.homebot') {
         message.channel.send('Hello im the HomeBot, how may i help?');
@@ -61,6 +70,7 @@ client.on('message', message => {
             console.log("data", data);
             message.channel.send(data);
         });
+        // Sends another Command for the Power Usage of the Dell Server
         exec("ipmitool -I lanplus -H XXX.XXX.XXX.XXX -U USER -P 'PASSWORD' dcmi power reading", (error, data, getter) => {
             if (error) {
                 console.log("error", error.message);
